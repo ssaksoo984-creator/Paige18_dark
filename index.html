@@ -23,6 +23,7 @@
       <a href="about.html">About</a>
       <a href="#works">Works</a>
       <a href="#press">Press</a>
+      <a href="#news">News</a>
       <a href="#people">People</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -68,9 +69,28 @@
       </div>
     </section>
 
+    <!-- ============ FEATURED ============ -->
+    <div class="partbar" id="featured-bar">
+      <div class="partbar__left"><span>Part 01</span><span class="partbar__dots"><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i></span></div>
+      <div class="partbar__center">Featured Productions</div>
+      <div class="partbar__right"><span class="partbar__dots"><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i></span><a href="#works" class="btn btn--sm">All works</a></div>
+    </div>
+
+    <section class="feat" id="featured" aria-roledescription="carousel" aria-label="Featured productions">
+      <div class="feat__slides"></div>
+      <div class="feat__ui">
+        <div class="feat__count mono"><b>01</b> / <span>04</span></div>
+        <div class="feat__arrows">
+          <button class="feat__prev" aria-label="Previous">←</button>
+          <button class="feat__next" aria-label="Next">→</button>
+        </div>
+      </div>
+      <nav class="feat__nav" aria-label="Choose production"></nav>
+    </section>
+
     <!-- ============ 2. ABOUT ============ -->
     <div class="partbar">
-      <div class="partbar__left"><span>Part 01</span><span class="partbar__dots"><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i></span></div>
+      <div class="partbar__left"><span>Part 02</span><span class="partbar__dots"><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i></span></div>
       <div class="partbar__center">Inside Paige 18</div>
       <div class="partbar__right"><span class="partbar__dots"><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i></span><a href="about.html" class="btn btn--sm">View more</a></div>
     </div>
@@ -82,8 +102,8 @@
           <p class="caps reveal"><em>Paige 18</em> is an independent production company based in <em>Vancouver</em>, developing original <em>film</em>, <em>theatre</em> and <em>web series</em> from first draft to final screening.</p>
           <div class="about__spaced">FRAME</div>
           <div class="about__img reveal">
-            <div data-ph="IMG" data-tone="210,8"></div>
-            <div data-ph="IMG" data-tone="0,0"></div>
+            <div data-ph="IMG" data-tone="210,8" data-key="about1"></div>
+            <div data-ph="IMG" data-tone="0,0" data-key="about2"></div>
           </div>
           <p class="caps reveal">We work with a <em>small, trusted</em> ensemble of writers, directors and performers — and keep <em>every project</em> close to the people who imagined it.</p>
         </div>
@@ -120,7 +140,7 @@
 
     <!-- ============ 3. WORKS ============ -->
     <div class="partbar" id="works">
-      <div class="partbar__left"><span>Part 02</span><span class="partbar__dots"><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i></span></div>
+      <div class="partbar__left"><span>Part 03</span><span class="partbar__dots"><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i></span></div>
       <div class="partbar__center">Works</div>
       <div class="partbar__right"><span class="partbar__dots"><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i></span><a href="#works" class="btn btn--sm">View all</a></div>
     </div>
@@ -141,7 +161,7 @@
 
     <!-- ============ 4. PRESS / AWARDS ============ -->
     <div class="partbar" id="press">
-      <div class="partbar__left"><span>Part 03</span><span class="partbar__dots"><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i></span></div>
+      <div class="partbar__left"><span>Part 04</span><span class="partbar__dots"><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i></span></div>
       <div class="partbar__center">Press &amp; Awards</div>
       <div class="partbar__right"><span class="partbar__dots"><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i></span><a href="#press" class="btn btn--sm">View more</a></div>
     </div>
@@ -178,9 +198,24 @@
       </div>
     </section>
 
+    <!-- ============ NEWS ============ -->
+    <div class="partbar" id="news">
+      <div class="partbar__left"><span>Part 05</span><span class="partbar__dots"><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i></span></div>
+      <div class="partbar__center">News</div>
+      <div class="partbar__right"><span class="partbar__dots"><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i></span><a href="#news" class="btn btn--sm">All news</a></div>
+    </div>
+
+    <section class="news">
+      <div class="works__head">
+        <h2 class="section-title reveal">Latest <span class="thin">News</span></h2>
+        <span class="mono" style="color:var(--fg-dim)">Premieres · Casting · Festivals</span>
+      </div>
+      <div class="news__grid" id="news-grid"></div>
+    </section>
+
     <!-- ============ 5. PEOPLE ============ -->
     <div class="partbar" id="people">
-      <div class="partbar__left"><span>Part 04</span><span class="partbar__dots"><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i></span></div>
+      <div class="partbar__left"><span>Part 06</span><span class="partbar__dots"><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i></span></div>
       <div class="partbar__center">People</div>
       <div class="partbar__right"><span class="partbar__dots"><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i></span><a href="about.html#team" class="btn btn--sm">View more</a></div>
     </div>
@@ -195,20 +230,20 @@
 
     <!-- Behind the work / reel -->
     <div class="partbar" id="reel">
-      <div class="partbar__left"><span>Part 05</span><span class="partbar__dots"><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i></span></div>
+      <div class="partbar__left"><span>Part 07</span><span class="partbar__dots"><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i></span></div>
       <div class="partbar__center">Behind the Work</div>
       <div class="partbar__right"><span class="partbar__dots"><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i></span><a href="#reel" class="btn btn--sm">Full reel</a></div>
     </div>
 
     <section class="reel">
-      <div data-ph="VIDEO — STUDIO REEL" data-tone="208,10" class="ph--center"></div>
+      <div data-ph="VIDEO — STUDIO REEL" data-tone="208,10" data-key="reel" class="ph--center"></div>
       <div class="reel__caption"><b>Reel 2026</b>by Paige 18 Production</div>
       <div class="reel__strip">
-        <div data-ph="IMG" data-tone="0,0"></div>
-        <div data-ph="IMG" data-tone="210,8"></div>
-        <div data-ph="IMG" data-tone="4,24"></div>
-        <div data-ph="IMG" data-tone="200,6"></div>
-        <div data-ph="IMG" data-tone="0,0"></div>
+        <div data-ph="IMG" data-tone="0,0" data-key="red-room"></div>
+        <div data-ph="IMG" data-tone="0,0" data-key="glass-city"></div>
+        <div data-ph="IMG" data-tone="0,0" data-key="low-tide"></div>
+        <div data-ph="IMG" data-tone="0,0" data-key="paper-saints"></div>
+        <div data-ph="IMG" data-tone="0,0" data-key="understudy"></div>
       </div>
       <button class="reel__play" aria-label="Play reel">PLAY</button>
       <div class="reel__controls"><span>▶</span><span>0:30 / 1:30</span><div class="reel__bar"><i></i></div><span>SOUND</span><span>⛶</span></div>
@@ -216,7 +251,7 @@
 
     <!-- ============ 6. CONTACT ============ -->
     <div class="partbar" id="contact">
-      <div class="partbar__left"><span>Part 06</span><span class="partbar__dots"><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i></span></div>
+      <div class="partbar__left"><span>Part 08</span><span class="partbar__dots"><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i></span></div>
       <div class="partbar__center">Work With Us</div>
       <div class="partbar__right"><span class="partbar__dots"><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i></span><a href="mailto:hello@paige18.com" class="btn btn--sm">Email</a></div>
     </div>
@@ -308,5 +343,6 @@
 
   <script src="assets/js/data.js"></script>
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/motion.js"></script>
 </body>
 </html>

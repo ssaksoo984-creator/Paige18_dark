@@ -13,7 +13,7 @@
     let inner = "";
     if (src) inner = video
       ? `<video src="${src}" muted loop playsinline preload="none"></video>`
-      : `<img src="${src}" alt="" loading="lazy">`;
+      : `<img src="${src}" alt="" loading="lazy" decoding="async" onerror="this.parentNode.classList.remove('has-media');this.remove()">`;
     return `<div class="ph ${cls} ${src ? "has-media" : ""}" data-label="${label}" style="${style}">${inner}</div>`;
   }
 
@@ -78,8 +78,91 @@
     $$(".tab").forEach(tab => tab.addEventListener("click", () => {
       $$(".tab").forEach(t => t.classList.toggle("is-active", t === tab));
       const f = tab.dataset.filter;
-      $$(".work", grid).forEach(card => card.classList.toggle("is-hidden", f !== "all" && card.dataset.type !== f));
+      const cards = $$(".work", grid);
+      cards.forEach(card => card.classList.add("is-filtering"));
+      setTimeout(() => {
+        cards.forEach(card => card.classList.toggle("is-hidden", f !== "all" && card.dataset.type !== f));
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          cards.filter(c => !c.classList.contains("is-hidden")).forEach((c, n) => {
+            c.style.setProperty("--n", n);
+            c.classList.remove("is-filtering");
+          });
+        }));
+      }, 380);
     }));
+  }
+
+  /* ---------- hero media ---------- */
+  const heroMedia = $(".hero__media");
+  const M = data.media || {};
+  if (heroMedia && (M.heroVideo || M.hero)) {
+    heroMedia.classList.add("has-media");
+    heroMedia.insertAdjacentHTML("afterbegin", M.heroVideo
+      ? `<video src="${M.heroVideo}" poster="${M.hero || ""}" autoplay muted loop playsinline></video>`
+      : `<img src="${M.hero}" alt="" onerror="this.parentNode.classList.remove('has-media');this.remove()">`);
+  }
+
+  /* ---------- featured productions slider ---------- */
+  const feat = $("#featured");
+  if (feat) {
+    const items = data.works.filter(w => w.featured);
+    $(".feat__slides", feat).innerHTML = items.map((w, i) => `
+      <article class="feat__slide${i ? "" : " is-active"}">
+        <div class="feat__bg">${media({ label: "KEY ART", tone: w.tone, src: w.poster })}</div>
+        <div class="feat__poster">${media({ label: "POSTER", tone: w.tone, src: w.poster })}</div>
+        <div class="feat__copy">
+          <span class="mono feat__kicker"><i class="sq red-bg"></i> ${TYPE_LABEL[w.type]} — ${w.year} — ${w.status}</span>
+          <h3 class="feat__title">${w.title}</h3>
+          <p class="feat__log">${w.logline}</p>
+          <div class="hero__cta" style="margin-top:22px">
+            <a href="work.html?id=${w.id}" class="btn btn--red">Explore <span class="arrow">→</span></a>
+            <a href="work.html?id=${w.id}" class="btn">Watch Trailer</a>
+          </div>
+        </div>
+      </article>`).join("");
+    $(".feat__nav", feat).innerHTML = items.map((w, i) => `
+      <button class="feat__tab${i ? "" : " is-active"}" data-i="${i}">
+        <span class="mono">${String(i + 1).padStart(2, "0")} / ${TYPE_LABEL[w.type]}</span>
+        <b>${w.title}</b>
+        <span class="feat__bar"><i></i></span>
+      </button>`).join("");
+
+    const slides = $$(".feat__slide", feat);
+    const tabs = $$(".feat__tab", feat);
+    const DUR = 6500;
+    let cur = 0, timer;
+    const go = n => {
+      cur = (n + slides.length) % slides.length;
+      slides.forEach((s, k) => s.classList.toggle("is-active", k === cur));
+      tabs.forEach((t, k) => {
+        t.classList.remove("is-active");
+        if (k === cur) { void t.offsetWidth; t.classList.add("is-active"); }
+      });
+      $(".feat__count b", feat).textContent = String(cur + 1).padStart(2, "0");
+      clearTimeout(timer);
+      timer = setTimeout(() => go(cur + 1), DUR);
+    };
+    feat.style.setProperty("--dur", DUR + "ms");
+    $(".feat__count span", feat).textContent = String(slides.length).padStart(2, "0");
+    tabs.forEach(t => t.addEventListener("click", () => go(+t.dataset.i)));
+    $(".feat__prev", feat).addEventListener("click", () => go(cur - 1));
+    $(".feat__next", feat).addEventListener("click", () => go(cur + 1));
+    go(0);
+  }
+
+  /* ---------- news ---------- */
+  const news = $("#news-grid");
+  if (news && data.news) {
+    const fmt = d => new Date(d + "T12:00:00").toLocaleDateString("en-CA", { year: "numeric", month: "short", day: "2-digit" });
+    news.innerHTML = data.news.map(n => {
+      const w = data.works.find(x => x.id === n.work) || {};
+      return `<a class="news-card reveal" href="work.html?id=${n.work}">
+        <div class="news-card__img">${media({ label: "IMG", tone: w.tone || [210, 8], src: w.poster })}</div>
+        <div class="news-card__meta mono"><span class="red">${n.tag}</span><span>${fmt(n.date)}</span></div>
+        <h3>${n.title}</h3>
+        <span class="mono news-card__more">Read more →</span>
+      </a>`;
+    }).join("");
   }
 
   /* ---------- people ---------- */
@@ -87,7 +170,7 @@
   if (peopleGrid) {
     peopleGrid.innerHTML = data.people.map((p, i) => `
       <article class="person reveal">
-        <div class="person__img">${media({ label: "PORTRAIT", tone: [210 + i * 8, 6] })}<span class="person__idx">0${i + 1}</span></div>
+        <div class="person__img">${media({ label: "PORTRAIT", tone: [210 + i * 8, 6], src: p.photo })}<span class="person__idx">0${i + 1}</span></div>
         <h3>${p.name}</h3>
         <span class="mono role">${p.role}</span>
         <p>${p.note}</p>
@@ -117,7 +200,10 @@
   /* ---------- fill [data-ph] placeholders declared in HTML ---------- */
   $$("[data-ph]").forEach(el => {
     const tone = (el.dataset.tone || "210,10").split(",").map(Number);
-    el.outerHTML = media({ label: el.dataset.ph, tone, src: el.dataset.src || "", video: el.hasAttribute("data-video"), cls: el.className });
+    const key = el.dataset.key || "";
+    const byWork = (data.works.find(w => w.id === key) || {}).poster;
+    const src = el.dataset.src || (data.media || {})[key] || byWork || "";
+    el.outerHTML = media({ label: el.dataset.ph, tone, src, video: el.hasAttribute("data-video"), cls: el.className });
   });
 
   /* ---------- stats count-up ---------- */
@@ -184,7 +270,7 @@
       ["Format", TYPE_LABEL[w.type]], ["Year", w.year], ["Runtime", w.runtime],
       ["Director", w.director], ["Status", w.status], ["Produced by", "PAIGE 18 Production"]
     ].map(([k, v]) => `<div><span class="mono">${k}</span><span>${v}</span></div>`).join("");
-    $("#d-stills").innerHTML = ["STILL 01", "STILL 02", "STILL 03"].map((l, i) => media({ label: l, tone: [w.tone[0] + i * 6, w.tone[1]] })).join("");
+    $("#d-stills").innerHTML = ["STILL 01", "STILL 02", "STILL 03"].map((l, i) => media({ label: l, tone: [w.tone[0] + i * 6, w.tone[1]], src: w.poster, cls: "still-" + i })).join("");
     const n = $("#d-next"); n.href = `work.html?id=${next.id}`; $("b", n).textContent = next.title;
   }
 

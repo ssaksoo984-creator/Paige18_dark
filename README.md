@@ -5,7 +5,8 @@ Static site for PAIGE 18 Production, a Vancouver film / theatre / web-series com
 - `index.html` — Home: Hero (trailer) · About · Works · Press & Awards · People · Behind the Work · Contact · Footer
 - `work.html?id=<work-id>` — Work detail template
 - `about.html` — About detail page
-- `assets/js/data.js` — **Edit works & people here**
+- `assets/js/data.js` — **Edit works, people, news & media here**
+- `assets/js/motion.js` — Intro loader, split-text reveals, image wipes, parallax, custom cursor
 - `assets/css/style.css` — Design tokens at `:root` (point red `--red: #b5372f`)
 
 ## Replacing placeholders
@@ -16,3 +17,8 @@ Static site for PAIGE 18 Production, a Vancouver film / theatre / web-series com
 - Festival laurels, press quotes, address, stats are placeholder copy.
 
 Open `index.html` directly in a browser — no build step.
+
+## Images
+Placeholder imagery is AI-generated (OpenArt) and currently linked from `cdn.openart.ai`.
+For production, download them into `assets/img/` and update the paths in `data.js`.
+If an image fails to load, the styled IMG placeholder is shown instead.
