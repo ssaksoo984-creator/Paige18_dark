@@ -1091,3 +1091,16 @@ body.loaded .hero__media { transform: none; }
   .footer__brand { flex-direction: column; align-items: flex-start; }
   .footer__tag { text-align: left; }
 }
+
+/* header lockup: spotlight mark + wordmark (mark only on phones) */
+.header .logo { display: inline-flex; flex-direction: row; align-items: flex-end; gap: 10px; line-height: 0; justify-self: start; }
+.header .logo img { width: auto; transition: height 0.4s var(--ease), opacity 0.3s; }
+.header .logo .logo__mark { height: 46px; }
+.header .logo .logo__word { height: 38px; }
+.header.is-scrolled .logo .logo__mark { height: 38px; }
+.header.is-scrolled .logo .logo__word { height: 32px; }
+@media (max-width: 860px) {
+  .header .logo .logo__word { display: none; }
+  .header .logo .logo__mark { height: 44px; }
+  .header.is-scrolled .logo .logo__mark { height: 34px; }
+}
