@@ -1182,3 +1182,16 @@ body.nav-open .nav__meta { opacity: 1; }
   .nav .nav__links a { font-size: clamp(34px, 10vw, 52px); }
 }
 .header__right { grid-column: -2 / -1; }
+
+/* header: logo | centered MENU | socials + CTA */
+.header > .burger { grid-column: 2; justify-self: center; align-self: center; }
+.header__right { grid-column: 3; align-self: center; }
+.social { display: inline-flex; align-items: center; gap: 4px; }
+.social a { width: 28px; height: 28px; display: grid; place-items: center; color: var(--fg-dim); transition: color 0.3s; }
+.social a:hover { color: var(--red); }
+.social svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linejoin: round; }
+.social svg .dot { fill: currentColor; stroke: none; }
+@media (max-width: 860px) {
+  .header > .burger { grid-column: 2; justify-self: end; }
+  .header__right { display: none; }
+}
