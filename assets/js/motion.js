@@ -131,7 +131,8 @@
       words.forEach((w, k) => {
         const r = w.getBoundingClientRect();
         const p = (r.top + r.height / 2 - vh / 2) / vh;      // -1 … 1 around viewport centre
-        w.style.transform = `translate3d(${(k ? -1 : 1) * p * 60}px,0,0)`;
+        // drift inward only, so the right-aligned word never slides off the edge
+        w.style.transform = `translate3d(${(k ? -1 : 1) * Math.max(0, p) * 60}px,0,0)`;
       });
       if (foot) {
         const r = foot.getBoundingClientRect();

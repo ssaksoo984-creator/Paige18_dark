@@ -25,8 +25,16 @@
 
   const burger = $(".burger");
   if (burger) {
-    burger.addEventListener("click", () => document.body.classList.toggle("nav-open"));
-    $$(".nav a").forEach(a => a.addEventListener("click", () => document.body.classList.remove("nav-open")));
+    const label = $("em", burger);
+    const setMenu = open => {
+      document.body.classList.toggle("nav-open", open);
+      burger.setAttribute("aria-expanded", open);
+      burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      if (label) label.textContent = open ? "Close" : "Menu";
+    };
+    burger.addEventListener("click", () => setMenu(!document.body.classList.contains("nav-open")));
+    $$(".nav a").forEach(a => a.addEventListener("click", () => setMenu(false)));
+    document.addEventListener("keydown", e => { if (e.key === "Escape") setMenu(false); });
   }
 
   /* ---------- hero video sound toggle ---------- */
