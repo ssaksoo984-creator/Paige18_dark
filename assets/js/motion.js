@@ -99,15 +99,14 @@
     body.insertAdjacentHTML("afterbegin", `
       <div class="intro" aria-hidden="true">
         <div class="intro__cross"></div>
-        <div class="intro__ring"></div>
-        <div class="intro__sweep"></div>
-        <div class="intro__num">00</div>
-        <div class="intro__word"><span class="mono">PAIGE 18 PRODUCTION</span><span class="mono">VANCOUVER — FILM · THEATRE · SERIES</span></div>
+        <img class="intro__logo" src="assets/img/logo.png" alt="">
+        <div class="intro__word"><span class="mono intro__num">00</span><span class="mono">VANCOUVER — FILM · THEATRE · SERIES</span></div>
       </div>`);
     const el = $(".intro");
     const num = $(".intro__num", el);
     const t0 = performance.now();
-    const dur = 1500;
+    const dur = 1700;
+    requestAnimationFrame(() => el.classList.add("is-on"));
     const step = t => {
       const p = Math.min((t - t0) / dur, 1);
       num.textContent = String(Math.round(18 * p)).padStart(2, "0");
@@ -116,7 +115,7 @@
         el.classList.add("is-done");
         done();
         setTimeout(() => el.remove(), 1200);
-      }, 250);
+      }, 450);
     };
     requestAnimationFrame(step);
   }
@@ -125,7 +124,7 @@
   function parallax() {
     if (reduce) return;
     const words = $$(".about__word");
-    const foot = $(".footer__word");
+    const foot = $(".footer__brand img");
     let ticking = false;
     const update = () => {
       const vh = window.innerHeight;

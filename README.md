@@ -7,6 +7,7 @@ Static site for PAIGE 18 Production, a Vancouver film / theatre / web-series com
 - `about.html` — About detail page
 - `assets/js/data.js` — **Edit works, people, news & media here**
 - `assets/js/motion.js` — Intro loader, split-text reveals, image wipes, parallax, custom cursor
+- `assets/img/logo.png` (full), `logo-wordmark.png` (header), `favicon.png` — logo files
 - `assets/css/style.css` — Design tokens at `:root` (point red `--red: #b5372f`)
 
 ## Replacing placeholders
