@@ -19,6 +19,5 @@ Static site for PAIGE 18 Production, a Vancouver film / theatre / web-series com
 Open `index.html` directly in a browser — no build step.
 
 ## Images
-Placeholder imagery is AI-generated (OpenArt) and currently linked from `cdn.openart.ai`.
-For production, download them into `assets/img/` and update the paths in `data.js`.
-If an image fails to load, the styled IMG placeholder is shown instead.
+Placeholder imagery and the hero loop are AI-generated (OpenArt), stored in `assets/img/` and `assets/video/`.
+Replace the files (or the paths in `data.js`) with real key art, stills and trailer. If an image fails to load, the styled IMG placeholder is shown instead.
